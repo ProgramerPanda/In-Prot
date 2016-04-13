@@ -25,16 +25,23 @@ namespace App3
         public MainPage()
         {
             this.InitializeComponent();
+           
         }
+        /*public MainPage(string message)
+        {
+            textBlock1.Text = message;
+        }*/
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(BlankPage1), null);
+            this.Frame.Navigate(typeof(LoginPage), null);
         }
 
-        private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
+        
 
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(RegisterPage), null);
         }
     }
 }

@@ -9,9 +9,10 @@
 
     <Grid Background="#FFDEB62C">
         
-        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Margin="10,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Height="50" PlaceholderText="e-mail" FontFamily="Segoe UI Emoji" FontSize="18.667"/>
-        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.703,2.25" Width="200" Height="50" PlaceholderText="Hasło" FontFamily="Segoe UI Emoji" FontSize="18.667"/>
-        <Button x:Name="button" Content="Zaloguj" HorizontalAlignment="Left" Height="50" Margin="10,215,0,0" VerticalAlignment="Top" Width="200" FontFamily="Segoe UI Emoji" FontSize="18.667" Background="#FFFF9C00" Click="button_Click"/>
+        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Margin="10,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Height="50" PlaceholderText="e-mail" FontFamily="Segoe UI Emoji" FontSize="18.667"/>
+        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.703,2.25" Width="200" Height="50" PlaceholderText="Hasło" FontFamily="Segoe UI Emoji" FontSize="18.667"/>
+        <Button x:Name="button1" Content="Zaloguj" HorizontalAlignment="Left" Height="50" Margin="10,220,0,0" VerticalAlignment="Top" Width="200" Click="button1_Click" FontFamily="Segoe UI Emoji" FontSize="18.667" Background="#FFFF9C00"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,55,0,0" TextWrapping="Wrap" Text="Logowanie" VerticalAlignment="Top"  Height="65" Width="290" FontFamily="Segoe UI Emoji" FontSize="32" Foreground="Black"/>
 
     </Grid>
 </Page>

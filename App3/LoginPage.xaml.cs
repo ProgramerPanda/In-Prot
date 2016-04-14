@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -30,10 +31,11 @@ namespace App3
             
         }
 
-        private async void button_Click(object sender, RoutedEventArgs e)
+        private async void button1_Click(object sender, RoutedEventArgs e)
         {
             var request = new RestRequest("http://localhost:3000/oauth/token", Method.POST);
             var client = new RestSharp.Portable.HttpClient.RestClient("http://localhost:3000/");
+            client.IgnoreResponseStatusCode = true;
 
             request.AddBody(new
             {
@@ -45,20 +47,37 @@ namespace App3
             });
 
             var response = await client.Execute(request).ConfigureAwait(true);
-            JsonDeserializer deserial = new JsonDeserializer();
-            Token token = deserial.Deserialize<Token>(response);
-            ApplicationState.CurrentToken = token;
+            HttpStatusCode statusCode = response.StatusCode;
+            int numericStatusCode = (int)statusCode;
+            if (numericStatusCode == 200)
+            {
+                JsonDeserializer deserial = new JsonDeserializer();
+                Token token = deserial.Deserialize<Token>(response);
+                ApplicationState.CurrentToken = token;
 
-            var dialog = new Windows.UI.Popups.MessageDialog("Zalogowano poprawnie, nastąpi przekierowanie do strony głównej");
-            dialog.Commands.Add(new Windows.UI.Popups.UICommand("Ok") { Id = 0 });
-            dialog.CancelCommandIndex = 0;
+                var dialog = new Windows.UI.Popups.MessageDialog("Zalogowano poprawnie, nastąpi przekierowanie do strony głównej");
+                dialog.Commands.Add(new Windows.UI.Popups.UICommand("Ok") { Id = 0 });
+                dialog.CancelCommandIndex = 0;
 
-            var result = await dialog.ShowAsync();
+                var result = await dialog.ShowAsync();
 
-            var btn = sender as Button;
-            btn.Content = $"Result: {result.Label} ({result.Id})";
-            Frame.Navigate(typeof(MainPage), null);
+                var btn = sender as Button;
+                btn.Content = $"Result: {result.Label} ({result.Id})";
+                Frame.Navigate(typeof(MainPage), null);
+            }
+            if (numericStatusCode == 401)
+            {
+                var dialog = new Windows.UI.Popups.MessageDialog("Niepoprawna nazwa użytkownika lub hasło");
+                dialog.Commands.Add(new Windows.UI.Popups.UICommand("Ok") { Id = 0 });
+                dialog.CancelCommandIndex = 0;
 
+                var result = await dialog.ShowAsync();
+
+                var btn = sender as Button;
+                //btn.Content = $"Result: {result.Label} ({result.Id})";                
+                passwordBox.Password = "";
+
+            }
         }
     }
 }
